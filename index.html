@@ -1205,7 +1205,7 @@ typeWriter();
         const fontSize = isHov ? 13 : 12;
         ctx.font = `${isHov ? '700' : '600'} ${fontSize}px "DM Sans", sans-serif`;
         const tw = ctx.measureText(p.name).width;
-        const pad = 10, bh = isHov ? 38 : 28, bw = tw + pad * 2 + (isHov ? 8 : 0);
+        const pad = 10, bh = isHov ? 30 : 28, bw = tw + pad * 2 + (isHov ? 8 : 0);
 
         // Outer glow halo on hover
         if (isHov) {
@@ -1259,15 +1259,9 @@ typeWriter();
         ctx.textBaseline = 'middle';
 
         if (isHov) {
-            // Two lines: name + level %
             ctx.font = `700 13px "DM Sans", sans-serif`;
             ctx.fillStyle = dark ? '#f0faff' : '#031526';
-            ctx.fillText(p.name, bx, by - bh * 0.65);
-
-            // Level with color accent
-            ctx.font = `700 11px "Space Mono", monospace`;
-            ctx.fillStyle = p.color;
-            ctx.fillText(p.level + '%', bx, by - bh * 0.28);
+            ctx.fillText(p.name, bx, by - bh / 2);
         } else {
             ctx.font = `600 12px "DM Sans", sans-serif`;
             ctx.fillStyle = dark ? '#e8f8ff' : '#031526';
@@ -1452,10 +1446,6 @@ typeWriter();
         const skillRows = cat.skills.map(sk => `
             <div class="skill-row">
                 <span class="skill-row-name">${sk.name}</span>
-                <div class="skill-row-right">
-                    <div class="skill-bar-wrap"><div class="skill-bar-fill" style="--fill-w:${sk.level}%; background:${cat.color}; opacity:0.9;"></div></div>
-                    <span class="skill-row-pct">${sk.level}%</span>
-                </div>
             </div>`).join('');
         card.innerHTML = `
             <div class="skill-domain-header">
