@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>FATIMA EZZAHRA KASRAOUI | Ocean Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* ═══ DARK THEME (défaut) ═══ */
+        :root, [data-theme="dark"] {
+            --ocean-top:      #011e38;
+            --ocean-mid:      #01294a;
+            --ocean-bot:      #033260;
+            --coral-red:      #ff4d3a;
+            --coral-orange:   #ff8c42;
+            --coral-pink:     #ff6b9d;
+            --coral-rose:     #ffccd8;
+            --coral-yellow:   #ffd166;
+            --biolum:         #7fffd4;
+            --biolum-blue:    #00c8ff;
+            --glass-bg:       rgba(1, 22, 42, 0.62);
+            --glass-border:   rgba(127,255,212,0.12);
+            --nav-bg:         rgba(1,14,28,0.75);
+            --nav-border:     rgba(127,255,212,0.08);
+            --text-main:      #f5fcff;
+            --text-body:      #d8f0fa;
+            --text-dim:       rgba(210,240,250,0.68);
+            --card-hover-border: rgba(255,107,157,0.35);
+            --scrollbar-bg:   #010d1a;
+            --section-tag:    var(--biolum);
+            --footer-border:  rgba(127,255,212,0.08);
+            --loader-bg1:     #011e38;
+            --loader-bg2:     #010d1a;
+            --glow-soft:      rgba(127,255,212,0.06);
+            --glow-pink:      rgba(255,107,157,0.08);
+        }
+
+        /* ═══ LIGHT THEME ═══ */
+        [data-theme="light"] {
+            --ocean-top:      #b3e5fc;
+            --ocean-mid:      #81d4fa;
+            --ocean-bot:      #4fc3f7;
+            --glass-bg:       rgba(255,255,255,0.62);
+            --glass-border:   rgba(2,90,160,0.14);
+            --nav-bg:         rgba(255,255,255,0.80);
+            --nav-border:     rgba(2,90,160,0.1);
+            --text-main:      #061e35;
+            --text-body:      #0e2d4a;
+            --text-dim:       rgba(8,30,55,0.68);
+            --card-hover-border: rgba(255,77,58,0.35);
+            --scrollbar-bg:   #b3e5fc;
+            --section-tag:    #0277bd;
+            --footer-border:  rgba(2,90,160,0.1);
+            --loader-bg1:     #b3e5fc;
+            --loader-bg2:     #81d4fa;
+            --glow-soft:      rgba(2,119,189,0.04);
+            --glow-pink:      rgba(255,77,58,0.06);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--ocean-top);
+            color: var(--text-main);
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden;
+            transition: background 0.7s, color 0.7s;
+            cursor: default;
+        }
+
+        /* ── GRAIN OVERLAY ── */
+        .grain-overlay {
+            position: fixed; inset: 0; z-index: 1;
+            pointer-events: none;
+            opacity: 0.028;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 200px 200px;
+        }
+        [data-theme="dark"] .grain-overlay { opacity: 0.035; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--scrollbar-bg); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--coral-pink), var(--biolum-blue)); border-radius: 4px; }
+
+        /* ── LOADER ── */
+        #loader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: radial-gradient(ellipse at 50% 60%, var(--loader-bg1) 0%, var(--loader-bg2) 100%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .loader-fish { font-size: 2.6rem; animation: loaderSwim 2.8s cubic-bezier(0.45,0.05,0.55,0.95) infinite alternate; }
+        @keyframes loaderSwim {
+            from { transform: translateX(-40px) rotate(-4deg) scale(0.95); }
+            to   { transform: translateX(40px) rotate(4deg) scale(1.05); }
+        }
+        .loader-text {
+            font-family:'Space Mono',monospace; font-size:0.62rem; letter-spacing:5px;
+            color:var(--biolum); margin-top:28px; opacity: 0.75;
+        }
+        .loader-bubbles { display:flex; gap:8px; margin-top:20px; }
+        .loader-bubbles span { width:6px; height:6px; border-radius:50%; background:var(--biolum-blue); opacity:0.6; animation:blobble 2s cubic-bezier(0.45,0.05,0.55,0.95) infinite; }
+        .loader-bubbles span:nth-child(2) { animation-delay:0.35s; background:var(--coral-pink); }
+        .loader-bubbles span:nth-child(3) { animation-delay:0.7s; background:var(--coral-orange); }
+        @keyframes blobble { 0%,100%{transform:translateY(0) scale(1);opacity:.5} 50%{transform:translateY(-14px) scale(1.1);opacity:.9} }
+
+        /* ── CANVAS ── */
+        #ocean-canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+
+        /* ── NAV ── */
+        .nav {
+            position:fixed; top:0; left:0; right:0; z-index:200;
+            padding:1.2rem 5%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(32px) saturate(1.4);
+            -webkit-backdrop-filter: blur(32px) saturate(1.4);
+            border-bottom: 1px solid var(--nav-border);
+            transition: background 0.6s, border-color 0.6s, padding 0.4s;
+        }
+        .nav.scrolled { padding: 0.8rem 5%; }
+        .nav-inner { max-width:1300px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
+        .logo {
+            font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-weight:600;
+            color:var(--text-main); letter-spacing: 0.02em;
+        }
+        .logo em { color:var(--coral-pink); font-style:italic; font-weight:300; }
+        .nav-links { display:flex; gap:2.4rem; list-style:none; }
+        .nav-links a {
+            font-size:0.66rem; text-transform:uppercase; letter-spacing:2.5px;
+            color:var(--text-dim); text-decoration:none;
+            transition: color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position:relative; font-weight: 500;
+        }
+        .nav-links a::after {
+            content:''; position:absolute; bottom:-5px; left:0; width:0; height:1px;
+            background: linear-gradient(90deg, var(--coral-pink), var(--biolum));
+            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-links a:hover { color: var(--text-main); }
+        .nav-links a:hover::after { width:100%; }
+
+        /* THEME TOGGLE */
+        .theme-btn {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 0.42rem 1.1rem;
+            cursor: pointer;
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            display: flex; align-items: center; gap: 6px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 500; letter-spacing: 0.5px;
+        }
+        .theme-btn:hover { border-color: rgba(127,255,212,0.3); color: var(--biolum); }
+
+        /* ── CONTENT ── */
+        .content { position:relative; z-index:10; }
+
+        section { padding: 8rem 5%; }
+        .section-header { text-align:center; margin-bottom:4.5rem; }
+        .section-tag {
+            font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:5px;
+            color:var(--section-tag); margin-bottom:1rem; opacity: 0.7;
+        }
+        .section-title {
+            font-family:'Cormorant Garamond',serif; font-size:clamp(2.2rem,5vw,3.4rem);
+            font-weight:600; line-height:1.1; color:var(--text-main);
+        }
+        .section-title em { color:var(--coral-pink); font-style:italic; font-weight:300; }
+
+        /* ── HERO ── */
+        .hero { min-height:100vh; display:flex; align-items:center; padding:0 5%; }
+        .hero-content { max-width:720px; }
+        .hero-badge {
+            display:inline-flex; align-items:center; gap:10px;
+            background: rgba(127,255,212,0.06);
+            border:1px solid rgba(127,255,212,0.18);
+            border-radius:50px; padding:0.5rem 1.3rem;
+            font-size:0.6rem; letter-spacing:3.5px;
+            color:var(--biolum); margin-bottom:2.2rem;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.6s;
+        }
+        .hero-badge:hover { border-color: rgba(127,255,212,0.35); }
+        [data-theme="light"] .hero-badge { background:rgba(2,119,189,0.07); border-color:rgba(2,119,189,0.22); color:#0277bd; }
+        .hero-badge .dot { width:5px; height:5px; background:var(--coral-pink); border-radius:50%; animation:pulse 3s cubic-bezier(0.45,0.05,0.55,0.95) infinite; }
+        @keyframes pulse { 0%,100%{opacity:.35;transform:scale(.7)} 50%{opacity:1;transform:scale(1.4)} }
+
+        .hero-name {
+            font-family:'Cormorant Garamond',serif;
+            font-size:clamp(3rem,8vw,6.2rem); font-weight:600;
+            line-height:1.02; margin-bottom:0.6rem; letter-spacing: -0.01em;
+        }
+        .hero-name .first { color:var(--text-main); font-weight:300; }
+        .hero-name .last {
+            background:linear-gradient(135deg,var(--coral-red) 0%,var(--coral-orange) 40%,var(--coral-pink) 100%);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            font-weight:700; font-style: italic;
+        }
+        .hero-sub {
+            font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:3.5px;
+            color:var(--biolum-blue); margin-bottom:0.8rem; opacity: 0.85;
+        }
+        [data-theme="light"] .hero-sub { color:#0277bd; }
+
+        /* Signature phrase */
+        .hero-signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem; font-style: italic; font-weight: 300;
+            color: var(--text-dim); margin-bottom: 1.8rem;
+            letter-spacing: 0.02em; opacity: 0.8;
+        }
+        [data-theme="light"] .hero-signature { opacity: 0.65; }
+
+        .hero-desc {
+            font-size:1.02rem; color:var(--text-body); line-height:1.9;
+            margin-bottom:2.2rem; max-width:520px; font-weight:400;
+            letter-spacing: 0.015em;
+        }
+
+        /* Terminal */
+        .terminal {
+            background: rgba(0,0,0,0.22);
+            border:1px solid rgba(127,255,212,0.14);
+            border-radius:18px; padding:1.2rem 1.6rem;
+            font-family:'Space Mono',monospace; font-size:0.73rem;
+            max-width:460px; margin-bottom:2.4rem;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2), inset 0 1px 0 rgba(127,255,212,0.06);
+        }
+        [data-theme="light"] .terminal { background:rgba(255,255,255,0.45); border-color:rgba(2,119,189,0.18); }
+        .t-bar { display:flex; gap:7px; margin-bottom:12px; }
+        .t-dot { width:9px; height:9px; border-radius:50%; }
+        .t-dot.r{background:var(--coral-red)} .t-dot.o{background:var(--coral-orange)} .t-dot.g{background:var(--biolum)}
+        .terminal-line { color:var(--biolum); margin:5px 0; opacity: 0.85; line-height: 1.6; }
+        [data-theme="light"] .terminal-line { color:#0277bd; }
+        .terminal-cursor { display:inline-block; width:6px; height:13px; background:var(--coral-pink); vertical-align:middle; animation:blink 1.2s step-end infinite; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        /* CTA */
+        .btn-group { display:flex; gap:1.2rem; flex-wrap:wrap; }
+        .btn-primary {
+            background: linear-gradient(135deg,var(--coral-red),var(--coral-pink));
+            border:none; padding:0.95rem 2rem; border-radius:50px;
+            color:#fff; font-weight:600; text-decoration:none;
+            display:inline-flex; align-items:center; gap:9px;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            font-family:'DM Sans',sans-serif; font-size:0.88rem; cursor: pointer;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 20px rgba(255,77,58,0.2);
+        }
+        .btn-primary:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(255,77,58,.3); }
+        .btn-outline {
+            background:transparent; border:1px solid rgba(127,255,212,0.28);
+            padding:0.95rem 2rem; border-radius:50px; color:var(--text-main);
+            text-decoration:none; display:inline-flex; align-items:center; gap:9px;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            font-family:'DM Sans',sans-serif; font-size:0.88rem; cursor: pointer;
+        }
+        [data-theme="light"] .btn-outline { border-color:rgba(2,119,189,0.3); }
+        .btn-outline:hover { border-color:rgba(127,255,212,0.6); color:var(--biolum); transform:translateY(-4px); }
+
+        /* ── STATS ── */
+        .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin:2.5rem 0; }
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(1.3);
+            -webkit-backdrop-filter: blur(20px) saturate(1.3);
+            border:1px solid var(--glass-border); border-radius:24px;
+            padding:1.8rem 1.4rem; text-align:center;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden;
+        }
+        .stat-card::before {
+            content:''; position:absolute; inset:0; border-radius:24px;
+            background: radial-gradient(ellipse at 50% 0%, var(--glow-soft) 0%, transparent 70%);
+            opacity: 0; transition: opacity 0.6s;
+        }
+        .stat-card:hover::before { opacity: 1; }
+        .stat-card:hover { border-color:rgba(127,255,212,0.22); transform:translateY(-6px); box-shadow: 0 24px 48px rgba(0,0,0,0.18); }
+        .stat-number {
+            font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:700;
+            background:linear-gradient(135deg,var(--coral-orange),var(--coral-pink));
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            line-height: 1;
+        }
+        .stat-label { font-size:0.66rem; color:var(--text-dim); margin-top:6px; letter-spacing:1.5px; font-weight:500; text-transform: uppercase; }
+
+        /* ── SKILLS OCEAN ── */
+        .skills-ocean-wrap {
+            position: relative; width: 100%; overflow: hidden;
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+        }
+        #skillsCanvas { display: block; width: 100%; cursor: none; }
+        .skills-legend {
+            display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
+            padding: 1.2rem 2rem 1.6rem;
+            border-top: 1px solid var(--glass-border);
+        }
+        .legend-item {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 0.65rem; letter-spacing: 1.5px; text-transform: uppercase;
+            color: var(--text-dim); font-weight: 600;
+        }
+        .legend-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+        }
+
+        /* ── FILTER BAR ── */
+        .filter-bar { display:flex; justify-content:center; gap:0.5rem; flex-wrap:wrap; margin-bottom:3rem; }
+        .filter-btn {
+            background:transparent; border:1px solid var(--glass-border);
+            padding:0.35rem 1rem; border-radius:50px; color:var(--text-dim);
+            cursor:none; font-size:0.6rem; font-weight:600; letter-spacing:1.5px;
+            text-transform:uppercase; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            white-space:nowrap; font-family:'DM Sans',sans-serif;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: rgba(255,107,157,0.08);
+            border-color:rgba(255,107,157,0.3); color:var(--coral-pink);
+        }
+
+        /* ── PROJECTS ── */
+        .projects-list { max-width:1000px; margin:0 auto; display:flex; flex-direction:column; gap:1.4rem; }
+        .project-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(1.3);
+            -webkit-backdrop-filter: blur(20px) saturate(1.3);
+            border:1px solid var(--glass-border); border-radius:26px;
+            padding:1.8rem 2.2rem; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; overflow: hidden;
+        }
+        .project-card::before {
+            content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+            background:linear-gradient(90deg,transparent,rgba(255,107,157,0.04),transparent);
+            transition: left 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card::after {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(127,255,212,0.2), transparent);
+            opacity: 0; transition: opacity 0.6s;
+        }
+        .project-card:hover::before { left:100%; }
+        .project-card:hover::after { opacity: 1; }
+        .project-card:hover {
+            transform:translateX(8px) translateY(-2px);
+            border-color:rgba(255,107,157,0.2);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,107,157,0.05);
+        }
+        .project-header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.8rem; margin-bottom:0.9rem; }
+        .project-title { font-size:1.05rem; font-weight:600; color:var(--text-main); letter-spacing: 0.01em; }
+        .project-category {
+            font-size:0.58rem; padding:0.24rem 0.9rem; border-radius:50px;
+            background:rgba(255,107,157,0.08); color:var(--coral-pink);
+            letter-spacing:1.5px; font-weight:600; border: 1px solid rgba(255,107,157,0.15);
+        }
+        .project-desc { font-size:0.9rem; color:var(--text-body); line-height:1.78; margin-bottom:1rem; font-weight:400; }
+        .project-tech { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.9rem; }
+        .tech-tag {
+            font-size:0.62rem; padding:0.22rem 0.8rem;
+            background:rgba(127,255,212,0.05); border:1px solid rgba(127,255,212,0.12);
+            border-radius:20px; color:var(--text-dim); font-family:'Space Mono',monospace;
+            transition: all 0.4s; letter-spacing: 0.3px;
+        }
+        .tech-tag:hover { border-color: rgba(127,255,212,0.28); color: var(--text-body); }
+        [data-theme="light"] .tech-tag { background:rgba(2,119,189,0.06); border-color:rgba(2,119,189,0.15); color:var(--text-body); }
+        .project-link {
+            color:var(--biolum-blue); text-decoration:none; font-size:0.72rem;
+            display:inline-flex; align-items:center; gap:6px;
+            transition: gap 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s;
+            font-weight:600; opacity: 0.8; letter-spacing: 0.3px;
+        }
+        [data-theme="light"] .project-link { color:#0277bd; }
+        .project-link:hover { gap:10px; opacity: 1; }
+
+        /* ── TIMELINE ── */
+        .timeline-wrap { max-width:800px; margin:0 auto; position:relative; }
+        .timeline-wrap::before {
+            content:''; position:absolute; left:20px; top:0; bottom:0; width:1px;
+            background: linear-gradient(to bottom, transparent, var(--coral-red) 10%, var(--coral-pink) 50%, var(--biolum-blue) 90%, transparent);
+        }
+        .timeline-item { position:relative; padding-left:62px; margin-bottom:3rem; }
+        .timeline-dot {
+            position:absolute; left:14px; top:5px; width:14px; height:14px;
+            border-radius:50%; background: var(--coral-pink);
+            border:1px solid var(--ocean-top);
+            box-shadow: 0 0 0 3px rgba(255,107,157,0.12), 0 0 16px rgba(255,107,157,0.3);
+            transition: box-shadow 0.5s;
+        }
+        .timeline-item:hover .timeline-dot {
+            box-shadow: 0 0 0 5px rgba(255,107,157,0.15), 0 0 24px rgba(255,107,157,0.5);
+        }
+        .timeline-date { font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--coral-orange); margin-bottom:5px; font-weight:700; letter-spacing: 0.5px; opacity: 0.9; }
+        .timeline-title { font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:600; margin-bottom:4px; color:var(--text-main); }
+        .timeline-sub { font-size:0.78rem; color:var(--text-dim); margin-bottom:8px; font-weight:400; letter-spacing: 0.3px; }
+        .timeline-desc { font-size:0.88rem; color:var(--text-body); line-height:1.72; }
+
+        /* ── CONTACT ── */
+        .contact-grid { display:grid; grid-template-columns:1fr; gap:3rem; max-width:560px; margin:0 auto; }
+        .contact-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(1.3);
+            -webkit-backdrop-filter: blur(20px) saturate(1.3);
+            border:1px solid var(--glass-border); border-radius:28px; padding:2.2rem;
+        }
+        .social-link {
+            display:flex; align-items:center; gap:1.1rem; padding:1rem 1.2rem;
+            border-radius:16px; color:var(--text-main); cursor:pointer;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-bottom:0.8rem; background:rgba(127,255,212,0.03); text-decoration:none;
+            border: 1px solid transparent;
+        }
+        [data-theme="light"] .social-link { background:rgba(2,119,189,0.03); }
+        .social-link:hover { background:rgba(255,107,157,0.07); transform:translateX(7px); border-color: rgba(255,107,157,0.12); }
+        .social-label { font-size:0.6rem; color:var(--text-dim); font-weight:600; letter-spacing:2px; text-transform:uppercase; }
+        .social-value { font-size:0.86rem; color:var(--text-main); font-weight:500; margin-top:2px; }
+        .form-group { margin-bottom:1rem; }
+        input, textarea {
+            width:100%; padding:0.95rem 1.1rem;
+            background:rgba(127,255,212,0.04); border:1px solid var(--glass-border);
+            border-radius:14px; color:var(--text-main); font-family:'DM Sans',sans-serif;
+            font-size:0.86rem; transition: border-color 0.5s, box-shadow 0.5s;
+            outline: none;
+        }
+        [data-theme="light"] input, [data-theme="light"] textarea { background:rgba(2,119,189,0.05); color:#0a2540; }
+        input:focus, textarea:focus { border-color:rgba(255,107,157,0.4); box-shadow: 0 0 0 3px rgba(255,107,157,0.06); }
+        input::placeholder, textarea::placeholder { color:var(--text-dim); font-size:0.8rem; }
+        .submit-btn {
+            width:100%; padding:1rem;
+            background:linear-gradient(135deg,var(--coral-red),var(--coral-pink));
+            border:none; border-radius:14px; color:#fff; font-weight:600;
+            cursor:pointer; font-family:'DM Sans',sans-serif; font-size:0.9rem;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            letter-spacing:0.5px; box-shadow: 0 4px 20px rgba(255,77,58,0.2);
+        }
+        .submit-btn:hover { transform:translateY(-3px); box-shadow:0 12px 35px rgba(255,77,58,.28); }
+        .available-badge {
+            margin-top:1.2rem; padding:0.85rem 1rem;
+            background:rgba(127,255,212,0.05); border:1px solid rgba(127,255,212,0.15);
+            border-radius:14px; text-align:center; font-size:0.62rem;
+            color:var(--biolum); font-weight:600; letter-spacing:2px; text-transform:uppercase;
+        }
+        [data-theme="light"] .available-badge { color:#0277bd; background:rgba(2,119,189,0.06); border-color:rgba(2,119,189,0.18); }
+        .available-badge span { display:inline-block; width:6px; height:6px; background:#4ade80; border-radius:50%; margin-right:8px; animation:pulse 2.5s cubic-bezier(0.45,0.05,0.55,0.95) infinite; }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align:center; padding:2.5rem; border-top:1px solid var(--footer-border);
+            font-size:0.68rem; color:var(--text-dim); letter-spacing: 0.5px;
+        }
+        footer em { color:var(--coral-pink); font-style:italic; font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ── MOBILE SKILLS ── */
+        .skills-mobile { display: none; }
+        .skill-domain-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 22px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: border-color 0.4s;
+        }
+        .skill-domain-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.1rem 1.4rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        .skill-domain-left { display: flex; align-items: center; gap: 12px; }
+        .skill-domain-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+        .skill-domain-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem; font-weight: 600; color: var(--text-main);
+        }
+        .skill-domain-count {
+            font-family: 'Space Mono', monospace; font-size: 0.58rem;
+            color: var(--text-dim); letter-spacing: 1.5px;
+        }
+        .skill-domain-chevron {
+            color: var(--text-dim); font-size: 0.75rem;
+            transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+        }
+        .skill-domain-card.open .skill-domain-chevron { transform: rotate(180deg); }
+        .skill-domain-body {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1);
+        }
+        .skill-domain-card.open .skill-domain-body { max-height: 400px; }
+        .skill-domain-inner { padding: 0 1.4rem 1.4rem; }
+        .skill-row {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .skill-row:last-child { border-bottom: none; }
+        .skill-row-name { font-size: 0.88rem; color: var(--text-body); font-weight: 500; }
+        .skill-row-right { display: flex; align-items: center; gap: 10px; }
+        .skill-bar-wrap {
+            width: 80px; height: 4px;
+            background: var(--glass-border);
+            border-radius: 4px; overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%; border-radius: 4px;
+            width: 0;
+            transition: width 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+        .skill-domain-card.open .skill-bar-fill { width: var(--fill-w); }
+        .skill-row-pct {
+            font-family: 'Space Mono', monospace; font-size: 0.62rem;
+            color: var(--text-dim); min-width: 28px; text-align: right;
+        }
+
+        @media (max-width:768px) {
+            .nav-links { display:none; }
+            .stats-grid { grid-template-columns:repeat(2,1fr); }
+            .contact-grid { grid-template-columns:1fr; }
+            body { cursor: auto; }
+            button, a { cursor: pointer; }
+            .skills-ocean-wrap { display: none; }
+            .skills-mobile { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Grain overlay -->
+<div class="grain-overlay"></div>
+
+<div id="loader">
+    <div class="loader-fish">🐠</div>
+    <div class="loader-text">PLONGÉE EN COURS...</div>
+    <div class="loader-bubbles"><span></span><span></span><span></span></div>
+</div>
+
+<canvas id="ocean-canvas"></canvas>
+
+<nav class="nav" id="mainNav">
+    <div class="nav-inner">
+        <div class="logo">F<em>K</em></div>
+        <ul class="nav-links">
+            <li><a href="#home">~fond</a></li>
+            <li><a href="#skills">~compétences</a></li>
+            <li><a href="#projects">~projets</a></li>
+            <li><a href="#timeline">~parcours</a></li>
+            <li><a href="#contact">~contact</a></li>
+        </ul>
+        <button class="theme-btn" id="themeBtn">☀️ Mode Clair</button>
+    </div>
+</nav>
+
+<div class="content">
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge"><span class="dot"></span>DISPONIBLE · STAGE & ALTERNANCE</div>
+            <h1 class="hero-name">
+                <span class="first">FATIMA EZZAHRA</span><br>
+                <span class="last">KASRAOUI</span>
+            </h1>
+            <p class="hero-sub">CYBERSECURITY ENGINEER · ENSA MARRAKECH</p>
+            <p class="hero-signature">Building secure systems beneath the surface.</p>
+            <p class="hero-desc">Étudiante ingénieure en Génie Cyber Défense & Télécommunications Embarquées à l'ENSA Marrakech. Je conçois des systèmes défensifs, explore la cryptographie post-quantique et développe des applications sécurisées. Chaque projet dans ce portfolio est une plongée un peu plus profonde.</p>
+            <div class="terminal">
+                <div class="t-bar"><div class="t-dot r"></div><div class="t-dot o"></div><div class="t-dot g"></div></div>
+                <div class="terminal-line">> Systèmes de défense actifs ✓</div>
+                <div class="terminal-line">> Intelligence des menaces chargée ✓</div>
+                <div class="terminal-line">> Chiffrement quantique prêt ✓</div>
+                <div class="terminal-line">> <span id="typing"></span><span class="terminal-cursor"></span></div>
+            </div>
+            <div class="btn-group">
+                <a href="#projects" class="btn-primary"><i class="fas fa-fish"></i> Explorer les projets</a>
+                <a href="#contact" class="btn-outline"><i class="fas fa-paper-plane"></i> Me contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats" style="padding-top:0">
+        <div class="stats-grid reveal" style="max-width:1200px;margin:0 auto">
+            <div class="stat-card"><div class="stat-number">+11</div><div class="stat-label">Projets réalisés</div></div>
+            <div class="stat-card"><div class="stat-number">15+</div><div class="stat-label">Technologies maîtrisées</div></div>
+            <div class="stat-card"><div class="stat-number">4ème</div><div class="stat-label">Année Cycle Ingénieur</div></div>
+            <div class="stat-card"><div class="stat-number">∞</div><div class="stat-label">Curiosité</div></div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="section-header reveal">
+            <div class="section-tag">[ COMPÉTENCES ]</div>
+            <h2 class="section-title">Arsenal <em>Technique</em></h2>
+        </div>
+        <div class="skills-ocean-wrap reveal">
+            <canvas id="skillsCanvas"></canvas>
+            <div class="skills-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:#7fffd4"></div>SOC & Défense</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#00c8ff"></div>Cloud & Infra</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#ff6b9d"></div>Crypto & Sécurité</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#ffd166"></div>Dev & Web</div>
+            </div>
+        </div>
+
+        <!-- MOBILE VERSION -->
+        <div class="skills-mobile reveal" id="skillsMobile"></div>
+    </section>
+
+    <section id="projects">
+        <div class="section-header reveal">
+            <div class="section-tag">[ OPÉRATIONS ACTIVES ]</div>
+            <h2 class="section-title">Mes <em>Projets</em></h2>
+        </div>
+        <div class="filter-bar reveal" id="filterBar">
+            <button class="filter-btn active" data-filter="all">TOUS</button>
+            <button class="filter-btn" data-filter="SOC">SOC</button>
+            <button class="filter-btn" data-filter="ICS">ICS/OT</button>
+            <button class="filter-btn" data-filter="Web App">WEB</button>
+            <button class="filter-btn" data-filter="Cryptography">CRYPTO</button>
+            <button class="filter-btn" data-filter="Blockchain">BLOCKCHAIN</button>
+            <button class="filter-btn" data-filter="AI">IA</button>
+        </div>
+        <div class="projects-list" id="projectsList"></div>
+    </section>
+
+    <section id="timeline">
+        <div class="section-header reveal">
+            <div class="section-tag">[ CHRONOLOGIE ]</div>
+            <h2 class="section-title">Mon <em>Parcours</em></h2>
+        </div>
+        <div class="timeline-wrap" id="timelineEl"></div>
+    </section>
+
+    <section id="contact">
+        <div class="section-header reveal">
+            <div class="section-tag">[ COMMUNICATIONS ]</div>
+            <h2 class="section-title">Établir un <em>Lien</em></h2>
+        </div>
+        <div class="contact-grid reveal">
+            <div class="contact-card">
+                <div class="social-link" onclick="window.open('https://github.com/fatima-ezzahra-kasraoui','_blank')">
+                    <i class="fab fa-github" style="font-size:1.6rem;color:var(--biolum)"></i>
+                    <div><div class="social-label">GITHUB</div><div class="social-value">@fatima-ezzahra-kasraoui</div></div>
+                </div>
+                <div class="social-link" onclick="window.open('https://www.linkedin.com/in/fatima-ezzahra-kasraoui/','_blank')">
+                    <i class="fab fa-linkedin" style="font-size:1.6rem;color:var(--biolum-blue)"></i>
+                    <div><div class="social-label">LINKEDIN</div><div class="social-value">Fatima Ezzahra KASRAOUI</div></div>
+                </div>
+                <div class="social-link">
+                    <i class="fas fa-envelope" style="font-size:1.6rem;color:var(--coral-pink)"></i>
+                    <div><div class="social-label">EMAIL</div><div class="social-value">f.kasraoui5160@uca.ac.ma</div></div>
+                </div>
+                <div class="social-link">
+                    <i class="fas fa-map-marker-alt" style="font-size:1.6rem;color:var(--coral-orange)"></i>
+                    <div><div class="social-label">LOCALISATION</div><div class="social-value">Marrakech, Maroc 🐠</div></div>
+                </div>
+                <div class="available-badge"><span></span>DISPONIBLE POUR DES MISSIONS</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 FATIMA EZZAHRA KASRAOUI &nbsp;·&nbsp; <em>Conçu avec soin</em> &nbsp;·&nbsp; Marrakech, Maroc</p>
+    </footer>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+//  LOADER
+// ════════════════════════════════════════════════
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const l = document.getElementById('loader');
+        l.style.opacity = '0';
+        setTimeout(() => l.style.display = 'none', 1800);
+    }, 2000);
+});
+
+// ════════════════════════════════════════════════
+//  NAV SCROLL
+// ════════════════════════════════════════════════
+window.addEventListener('scroll', () => {
+    const nav = document.getElementById('mainNav');
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ════════════════════════════════════════════════
+//  THEME TOGGLE
+// ════════════════════════════════════════════════
+const themeBtn = document.getElementById('themeBtn');
+let isDark = true;
+themeBtn.addEventListener('click', () => {
+    isDark = !isDark;
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    themeBtn.textContent = isDark ? '☀️ Mode Clair' : '🌙 Mode Sombre';
+    oceanTheme = isDark ? 'dark' : 'light';
+});
+
+// ════════════════════════════════════════════════
+//  SCROLL REVEAL
+// ════════════════════════════════════════════════
+const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ════════════════════════════════════════════════
+//  OCEAN CANVAS
+// ════════════════════════════════════════════════
+let oceanTheme = 'dark';
+
+(function() {
+    const canvas = document.getElementById('ocean-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H;
+    function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Light rays — slower, more elegant
+    const rays = Array.from({length:7}, (_, i) => ({
+        x: W * (i + 0.5) / 7 + (Math.random()-.5)*80,
+        w: 28 + Math.random()*48,
+        speed: 0.00018 + Math.random()*0.00015,
+        phase: Math.random()*Math.PI*2,
+        alpha: 0.04 + Math.random()*0.04
+    }));
+
+    // Bubbles — fewer, more elegant
+    const BUBBLE_COLORS = ['rgba(127,255,212,.5)','rgba(0,200,255,.4)','rgba(255,179,193,.45)','rgba(255,210,100,.35)','rgba(255,140,66,.32)','rgba(220,240,255,.42)'];
+    const bubbles = Array.from({length:50}, () => mkBubble());
+    function mkBubble(bot=false) {
+        return {
+            x: Math.random()*(W||800),
+            y: bot ? (H||800)+10 : Math.random()*(H||800),
+            r: 1.2 + Math.random()*4,
+            speed: 0.18 + Math.random()*0.55,
+            wobble: Math.random()*Math.PI*2,
+            ws: 0.012 + Math.random()*0.012,
+            color: BUBBLE_COLORS[Math.floor(Math.random()*BUBBLE_COLORS.length)]
+        };
+    }
+
+    // Ocean flora — seaweed, kelp, sea fans, anemones
+    const PLANT_TYPES = ['seaweed','seaweed','seaweed','kelp','fan','anemone','anemone'];
+    const weeds = Array.from({length:32}, (_, i) => ({
+        x: (W||800) * (i/31) + (Math.random()-.5)*28,
+        h: 40 + Math.random()*130,
+        segs: 7 + Math.floor(Math.random()*7),
+        phase: Math.random()*Math.PI*2,
+        speed: 0.004 + Math.random()*0.007,
+        hue: 125 + Math.random()*90,
+        sat: 35 + Math.random()*35,
+        lit: 16 + Math.random()*22,
+        type: PLANT_TYPES[Math.floor(Math.random()*PLANT_TYPES.length)],
+        width: 1.4 + Math.random()*2.2,
+        leafSize: 5 + Math.random()*12,
+        tentacles: 5 + Math.floor(Math.random()*6)
+    }));
+
+    const PALETTES = [
+        {body:'#ff4d2a',fin:'#ff6b00',tail:'#c03010',belly:'#ffcca0',eye:'#fff',species:'clown',stripe:'rgba(255,255,255,.45)'},
+        {body:'#ff4d8a',fin:'#ff2060',tail:'#c01050',belly:'#ffd6e7',eye:'#fff',species:'basic',stripe:null},
+        {body:'#ff8c00',fin:'#ffb300',tail:'#e06000',belly:'#ffe0a0',eye:'#333',species:'basic',stripe:null},
+        {body:'#b040ff',fin:'#8020dd',tail:'#6010bb',belly:'#e0b0ff',eye:'#fff',species:'angel',stripe:'rgba(255,255,255,.3)'},
+        {body:'#00c8c8',fin:'#00a0a0',tail:'#007070',belly:'#b0ffff',eye:'#fff',species:'basic',stripe:null},
+        {body:'#e8230a',fin:'#ff4422',tail:'#a01005',belly:'#ffb0a0',eye:'#fff',species:'basic',stripe:null},
+        {body:'#ffdd00',fin:'#ffaa00',tail:'#cc9900',belly:'#fffaaa',eye:'#333',species:'clown',stripe:'rgba(0,0,0,.18)'},
+        {body:'#ff8570',fin:'#ff6655',tail:'#cc4433',belly:'#ffd0c0',eye:'#fff',species:'basic',stripe:null},
+        {body:'#1060ff',fin:'#0040dd',tail:'#0020aa',belly:'#a0c0ff',eye:'#fff',species:'angel',stripe:'rgba(255,255,255,.25)'},
+        {body:'#60ee20',fin:'#40cc10',tail:'#208800',belly:'#ccffaa',eye:'#333',species:'basic',stripe:null},
+        {body:'#ee10aa',fin:'#cc0088',tail:'#880055',belly:'#ffaadd',eye:'#fff',species:'basic',stripe:null},
+        {body:'#ffaa20',fin:'#ff8800',tail:'#cc6600',belly:'#ffe8a0',eye:'#333',species:'clown',stripe:'rgba(255,255,255,.35)'},
+    ];
+
+    function mkFish(i) {
+        const pal = PALETTES[i % PALETTES.length];
+        const size = 14 + Math.random()*24;
+        const dir  = Math.random() < .5 ? 1 : -1;
+        return {
+            x: dir===1 ? -size*5 : (W+size*5),
+            y: 70 + Math.random()*(H - 200),
+            size, dir,
+            speed: 0.22 + Math.random()*0.85,
+            wobble: Math.random()*Math.PI*2,
+            wobbleAmp: 0.5 + Math.random()*1.4,
+            wobbleSpeed: 0.014 + Math.random()*0.016,
+            tailPhase: Math.random()*Math.PI*2,
+            pal
+        };
+    }
+
+    const fish = Array.from({length:18}, (_, i) => mkFish(i));
+
+    function drawFish(f) {
+        const p = f.pal, s = f.size;
+        ctx.save();
+        ctx.translate(f.x, f.y + Math.sin(f.wobble)*f.wobbleAmp);
+        if (f.dir < 0) ctx.scale(-1,1);
+        const swing = Math.sin(f.tailPhase) * 0.32;
+        ctx.save();
+        ctx.translate(-s*.9, 0); ctx.rotate(swing);
+        ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(-s*.72,-s*.58); ctx.lineTo(-s*.72,s*.58); ctx.closePath();
+        ctx.fillStyle = p.tail; ctx.fill();
+        ctx.restore();
+        const gr = ctx.createRadialGradient(-s*.22,-s*.14,s*.05, 0,0,s);
+        gr.addColorStop(0, p.belly); gr.addColorStop(0.5, p.body); gr.addColorStop(1, p.fin);
+        ctx.beginPath(); ctx.ellipse(0,0,s,s*.48,0,0,Math.PI*2); ctx.fillStyle = gr; ctx.fill();
+        if (p.stripe) {
+            ctx.save(); ctx.beginPath(); ctx.ellipse(0,0,s,s*.48,0,0,Math.PI*2); ctx.clip();
+            const nb = p.species==='clown' ? 3 : 2;
+            for (let si=0; si<nb; si++) { const sx=-s*.4+si*(s*.5); ctx.beginPath(); ctx.rect(sx-s*.1,-s*.5,s*.18,s); ctx.fillStyle=p.stripe; ctx.fill(); }
+            ctx.restore();
+        }
+        ctx.beginPath(); ctx.moveTo(-s*.3,-s*.42); ctx.quadraticCurveTo(s*.1,-s*1.05,s*.5,-s*.42); ctx.lineTo(s*.5,-s*.28); ctx.quadraticCurveTo(s*.1,-s*.62,-s*.3,-s*.28); ctx.closePath(); ctx.fillStyle=p.fin+'bb'; ctx.fill();
+        ctx.beginPath(); ctx.ellipse(s*.05,s*.16,s*.33,s*.17,.5,0,Math.PI*2); ctx.fillStyle=p.fin+'88'; ctx.fill();
+        ctx.beginPath(); ctx.moveTo(-s*.1,s*.38); ctx.quadraticCurveTo(s*.2,s*.75,s*.45,s*.38); ctx.lineTo(s*.45,s*.28); ctx.quadraticCurveTo(s*.2,s*.55,-s*.1,s*.28); ctx.closePath(); ctx.fillStyle=p.tail+'99'; ctx.fill();
+        ctx.beginPath(); ctx.arc(s*.65,-s*.1,s*.11,0,Math.PI*2); ctx.fillStyle='#0a0a0a'; ctx.fill();
+        ctx.beginPath(); ctx.arc(s*.67,-s*.12,s*.045,0,Math.PI*2); ctx.fillStyle=p.eye; ctx.fill();
+        ctx.restore();
+    }
+
+    function drawSeaweed(w, t) {
+        const col = `hsl(${w.hue},${w.sat}%,${w.lit}%)`;
+        ctx.save();
+        ctx.translate(w.x, H);
+
+        if (w.type === 'kelp') {
+            // Thick kelp with side blades
+            const segH = w.h / w.segs;
+            ctx.lineCap='round'; ctx.lineJoin='round';
+            let cx=0, cy=0;
+            const pts=[[0,0]];
+            for (let i=0;i<w.segs;i++) {
+                const sway=Math.sin(t*w.speed+w.phase+i*.45)*7*(i/w.segs);
+                cx+=sway; cy-=segH; pts.push([cx,cy]);
+            }
+            // Draw kelp stalk
+            ctx.beginPath(); ctx.moveTo(pts[0][0],pts[0][1]);
+            for (let i=1;i<pts.length;i++) ctx.lineTo(pts[i][0],pts[i][1]);
+            ctx.strokeStyle=col; ctx.lineWidth=w.width+1.8; ctx.stroke();
+            // Kelp blades
+            for (let i=1;i<pts.length;i+=2) {
+                const [bx,by]=pts[i];
+                const blen=w.leafSize*1.5;
+                const bsway=Math.sin(t*w.speed*1.4+w.phase+i)*0.35;
+                ctx.save(); ctx.translate(bx,by);
+                [1,-1].forEach(dir => {
+                    ctx.save(); ctx.rotate(bsway*dir);
+                    ctx.beginPath(); ctx.moveTo(0,0);
+                    ctx.quadraticCurveTo(blen*.5*dir,-blen*.25,blen*dir,-blen*.05);
+                    ctx.strokeStyle=`hsla(${w.hue+15},${w.sat+12}%,${w.lit+10}%,0.75)`;
+                    ctx.lineWidth=1.8; ctx.stroke(); ctx.restore();
+                });
+                ctx.restore();
+            }
+
+        } else if (w.type === 'fan') {
+            // Sea fan coral — recursive branching
+            ctx.lineCap='round';
+            const drawBranch = (x,y,angle,len,depth) => {
+                if (depth===0 || len<3) return;
+                const sway=Math.sin(t*w.speed+w.phase+depth*0.8)*0.18*(3-depth);
+                const ex=x+Math.cos(angle+sway)*len;
+                const ey=y-Math.abs(Math.sin(angle+sway))*len*0.85;
+                ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(ex,ey);
+                ctx.strokeStyle=`hsla(${w.hue},${w.sat}%,${w.lit+depth*5}%,${0.55+depth*0.1})`;
+                ctx.lineWidth=depth*0.9; ctx.stroke();
+                drawBranch(ex,ey,angle-0.52,len*0.68,depth-1);
+                drawBranch(ex,ey,angle+0.52,len*0.68,depth-1);
+            };
+            drawBranch(0,0,Math.PI/2,w.h*0.48,4);
+
+        } else if (w.type === 'anemone') {
+            // Anemone with waving tentacles and glowing tips
+            for (let ti=0;ti<w.tentacles;ti++) {
+                const tPhase=(ti/w.tentacles)*Math.PI*2;
+                const tlen=w.h*0.85;
+                const sway=Math.sin(t*w.speed*1.6+tPhase)*tlen*0.3;
+                const ex=Math.cos(tPhase)*w.leafSize*0.9+sway*0.5;
+                const ey=-tlen;
+                ctx.beginPath(); ctx.moveTo(0,0);
+                ctx.bezierCurveTo(sway*.6,-tlen*.45, ex*.8,ey*.8, ex,ey);
+                ctx.strokeStyle=`hsla(${w.hue+ti*8},${w.sat+18}%,${w.lit+14}%,0.75)`;
+                ctx.lineWidth=1.3; ctx.lineCap='round'; ctx.stroke();
+                // Glowing tip
+                ctx.beginPath(); ctx.arc(ex,ey,2.8,0,Math.PI*2);
+                ctx.fillStyle=`hsla(${w.hue+30},85%,${w.lit+30}%,${0.7+Math.sin(t*w.speed*2+tPhase)*0.3})`;
+                ctx.fill();
+            }
+            // Base bulb
+            ctx.beginPath(); ctx.ellipse(0,-4,w.leafSize*0.35,5,0,0,Math.PI*2);
+            ctx.fillStyle=`hsla(${w.hue},${w.sat}%,${w.lit+5}%,0.6)`; ctx.fill();
+
+        } else {
+            // Standard seaweed with small leaves
+            const segH = w.h / w.segs;
+            ctx.strokeStyle = col; ctx.lineWidth=w.width; ctx.lineCap='round'; ctx.lineJoin='round';
+            const pts=[[0,0]];
+            let cx=0,cy=0;
+            for (let i=0;i<w.segs;i++) {
+                const sway=Math.sin(t*w.speed+w.phase+i*.55)*6*(i/w.segs);
+                cx+=sway; cy-=segH; pts.push([cx,cy]);
+            }
+            ctx.beginPath(); ctx.moveTo(0,0);
+            pts.forEach(([x,y])=>ctx.lineTo(x,y)); ctx.stroke();
+            // Small oval leaves
+            for (let i=2;i<pts.length-1;i+=3) {
+                const [lx,ly]=pts[i];
+                const lsway=Math.sin(t*w.speed*1.2+i)*0.28;
+                ctx.save(); ctx.translate(lx,ly); ctx.rotate(lsway);
+                const ll=w.leafSize*0.9;
+                ctx.beginPath(); ctx.ellipse(ll*.5,0,ll,ll*.28,0,0,Math.PI*2);
+                ctx.fillStyle=`hsla(${w.hue+10},${w.sat+8}%,${w.lit+6}%,0.5)`; ctx.fill();
+                ctx.restore();
+            }
+        }
+        ctx.restore();
+    }
+
+    function drawRay(ray, t, theme) {
+        const sw = Math.sin(t*ray.speed+ray.phase)*40;
+        const rx = ray.x + sw;
+        const alpha = theme==='light' ? ray.alpha*0.65 : ray.alpha;
+        const col1 = theme==='light' ? `rgba(200,240,255,${alpha})` : `rgba(70,190,255,${alpha})`;
+        const grad = ctx.createLinearGradient(rx,0,rx,H*.88);
+        grad.addColorStop(0, col1); grad.addColorStop(1,'rgba(80,200,255,0)');
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(rx-ray.w/2,0); ctx.lineTo(rx+ray.w/2,0);
+        ctx.lineTo(rx+ray.w*.3,H*.92); ctx.lineTo(rx-ray.w*.3,H*.92);
+        ctx.closePath(); ctx.fillStyle=grad; ctx.fill(); ctx.restore();
+    }
+
+    let t=0;
+    function loop() {
+        requestAnimationFrame(loop);
+        t+=10; // slower animation
+        const th = oceanTheme;
+        let bg;
+        if (th==='light') {
+            bg = ctx.createLinearGradient(0,0,0,H);
+            bg.addColorStop(0,'#b3e5fc'); bg.addColorStop(0.5,'#81d4fa'); bg.addColorStop(1,'#4fc3f7');
+        } else {
+            bg = ctx.createLinearGradient(0,0,0,H);
+            bg.addColorStop(0,'#011e38'); bg.addColorStop(0.5,'#01294a'); bg.addColorStop(1,'#033260');
+        }
+        ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+        if (th==='light') {
+            for (let i=0;i<5;i++) {
+                const cx2=(W/5)*(i+.5)+Math.sin(t*0.0004+i)*70;
+                const g2=ctx.createRadialGradient(cx2,H*.15,0,cx2,H*.15,100);
+                g2.addColorStop(0,'rgba(255,255,255,0.1)'); g2.addColorStop(1,'rgba(255,255,255,0)');
+                ctx.fillStyle=g2; ctx.fillRect(0,0,W,H);
+            }
+        }
+
+        rays.forEach(r=>drawRay(r,t,th));
+        weeds.forEach(w=>drawSeaweed(w,t));
+
+        bubbles.forEach((b,idx)=>{
+            b.y-=b.speed; b.wobble+=b.ws;
+            const bx=b.x+Math.sin(b.wobble)*1.5;
+            ctx.beginPath(); ctx.arc(bx,b.y,b.r,0,Math.PI*2);
+            ctx.strokeStyle=b.color; ctx.lineWidth=0.8; ctx.stroke();
+            ctx.beginPath(); ctx.arc(bx-b.r*.3,b.y-b.r*.3,b.r*.22,0,Math.PI*2);
+            ctx.fillStyle='rgba(255,255,255,.38)'; ctx.fill();
+            if (b.y+b.r<0) bubbles[idx]=mkBubble(true);
+        });
+
+        fish.forEach((f,idx)=>{
+            f.x+=f.speed*f.dir; f.wobble+=f.wobbleSpeed; f.tailPhase+=0.05;
+            drawFish(f);
+            const gone = f.dir===1 ? f.x>W+f.size*5 : f.x<-f.size*5;
+            if (gone) { fish[idx]=mkFish(idx); fish[idx].y=70+Math.random()*(H-200); }
+        });
+
+        const sand = ctx.createLinearGradient(0,H-60,0,H);
+        if (th==='light') {
+            sand.addColorStop(0,'rgba(240,200,120,0)'); sand.addColorStop(1,'rgba(240,200,120,0.35)');
+        } else {
+            sand.addColorStop(0,'rgba(140,95,50,0)'); sand.addColorStop(1,'rgba(140,95,50,0.22)');
+        }
+        ctx.fillStyle=sand; ctx.fillRect(0,H-60,W,60);
+    }
+    loop();
+})();
+
+// ════════════════════════════════════════════════
+//  TYPEWRITER
+// ════════════════════════════════════════════════
+const typingEl = document.getElementById('typing');
+const texts = ['Défense Active Engagée 🐠','Intelligence des Menaces Chargée 🦈','Chiffrement Quantique Prêt 🐡','Prête pour Mission 🌊'];
+let tIdx=0, cIdx=0;
+function typeWriter() {
+    if (cIdx<texts[tIdx].length) { typingEl.textContent+=texts[tIdx][cIdx++]; setTimeout(typeWriter,65); }
+    else { setTimeout(()=>{ typingEl.textContent=''; cIdx=0; tIdx=(tIdx+1)%texts.length; typeWriter(); },2800); }
+}
+typeWriter();
+
+// ════════════════════════════════════════════════
+//  SKILLS OCEAN ECOSYSTEM
+// ════════════════════════════════════════════════
+(function() {
+    const canvas = document.getElementById('skillsCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const skillData = [
+        { category: 'SOC & Défense', color: '#7fffd4', glow: 'rgba(127,255,212,0.5)', type: 'kelp', skills: [
+            {name:'Wazuh / SIEM', level:88},
+            {name:'MITRE ATT&CK', level:85},
+            {name:'TheHive / Cortex', level:82},
+            {name:'Microsoft Sentinel', level:80},
+            {name:'Suricata / IDS', level:78}
+        ]},
+        { category: 'Cloud & Infra', color: '#00c8ff', glow: 'rgba(0,200,255,0.5)', type: 'fan', skills: [
+            {name:'Azure', level:85},
+            {name:'Docker', level:88},
+            {name:'FortiGate / WAF', level:78},
+            {name:'NGINX', level:80},
+            {name:'Linux / Réseaux', level:90}
+        ]},
+        { category: 'Crypto & Sécurité', color: '#ff6b9d', glow: 'rgba(255,107,157,0.5)', type: 'anemone', skills: [
+            {name:'Cryptographie (NTRU)', level:82},
+            {name:'Python', level:92},
+            {name:'Flask / API', level:85},
+            {name:'Blockchain', level:75}
+        ]},
+        { category: 'Dev & Web', color: '#ffd166', glow: 'rgba(255,209,102,0.5)', type: 'kelp', skills: [
+            {name:'React.js', level:80},
+            {name:'Node.js', level:85},
+            {name:'Java', level:78},
+            {name:'Spring Boot', level:75},
+            {name:'HTML / CSS / JS', level:88},
+            {name:'PHP / MySQL', level:76}
+        ]}
+    ];
+
+    let W, H, t = 0, hoveredPlant = null;
+    const isDarkFn = () => document.documentElement.getAttribute('data-theme') !== 'light';
+
+    // All plants flat list for interaction
+    let plants = [];
+    // Floating bubbles (skill name bubbles)
+    let skillBubbles = [];
+
+    function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        W = canvas.width = rect.width;
+        H = canvas.height = Math.max(480, window.innerHeight * 0.62);
+        canvas.style.height = H + 'px';
+        buildPlants();
+    }
+
+    function buildPlants() {
+        plants = [];
+        skillBubbles = [];
+        const totalSkills = skillData.reduce((a,c) => a + c.skills.length, 0);
+        const colW = W / totalSkills;
+        let idx = 0;
+
+        skillData.forEach((cat, ci) => {
+            cat.skills.forEach((sk, si) => {
+                const baseH = H * 0.35 + (sk.level / 100) * H * 0.38;
+                const xPos = (idx + 0.5) * colW + (Math.random() - 0.5) * colW * 0.3;
+                const plant = {
+                    x: xPos, baseY: H,
+                    height: baseH,
+                    targetH: baseH,
+                    currentH: 0,
+                    name: sk.name,
+                    level: sk.level,
+                    type: cat.type,
+                    color: cat.color,
+                    glow: cat.glow,
+                    phase: Math.random() * Math.PI * 2,
+                    speed: 0.004 + Math.random() * 0.004,
+                    segs: 8 + Math.floor(Math.random() * 5),
+                    hue: ci === 0 ? 160 + Math.random()*30 : ci === 1 ? 195 + Math.random()*20 : ci === 2 ? 330 + Math.random()*20 : 45 + Math.random()*20,
+                    sat: 55 + Math.random() * 25,
+                    lit: isDarkFn() ? 28 + Math.random()*18 : 35 + Math.random()*22,
+                    width: 2 + (sk.level / 100) * 3,
+                    tentacles: 5 + Math.floor(Math.random() * 4),
+                    leafSize: 6 + sk.level * 0.12,
+                    hovered: false,
+                    bubbleAlpha: 0,
+                    labelAlpha: 0,
+                    bubbleY: 0,
+                    growProgress: 0
+                };
+                plant.bubbleY = H - baseH - 30;
+                plants.push(plant);
+                idx++;
+            });
+        });
+    }
+
+    // ambient small bubbles
+    let ambBubbles = Array.from({length: 25}, () => mkAmbBubble());
+    function mkAmbBubble(bot=false) {
+        return { x: Math.random()*800, y: bot ? H+5 : Math.random()*H, r: 1+Math.random()*3.5, speed: 0.12+Math.random()*0.35, wobble: Math.random()*Math.PI*2, ws: 0.01+Math.random()*0.015 };
+    }
+
+    // ── DRAW FUNCTIONS ──
+
+    function drawKelp(p, t, progress) {
+        if (progress < 0.01) return;
+        const h = p.height * progress;
+        const segH = h / p.segs;
+        ctx.save(); ctx.translate(p.x, H);
+        const dark = isDarkFn();
+        const col = `hsl(${p.hue},${p.sat}%,${p.lit}%)`;
+
+        // Glow when hovered
+        if (p.hovered) {
+            ctx.shadowColor = p.glow; ctx.shadowBlur = 18;
+        }
+
+        let cx=0, cy=0;
+        const pts=[[0,0]];
+        for (let i=0;i<p.segs;i++) {
+        const sway = Math.sin(t*p.speed+p.phase+i*.45)*4*progress*(i/p.segs);
+            cx+=sway; cy-=segH; pts.push([cx,cy]);
+        }
+        // Stalk
+        ctx.beginPath(); ctx.moveTo(0,0);
+        pts.forEach(([x,y]) => ctx.lineTo(x,y));
+        ctx.strokeStyle=col; ctx.lineWidth=p.width+1.5; ctx.lineCap='round'; ctx.stroke();
+        ctx.shadowBlur=0;
+        // Blades
+        for (let i=1;i<pts.length;i+=2) {
+            const [bx,by]=pts[i];
+            const blen=p.leafSize*1.4*progress;
+            const bsway=Math.sin(t*p.speed*1.5+p.phase+i)*0.3;
+            [1,-1].forEach(dir=>{
+                ctx.save(); ctx.translate(bx,by); ctx.rotate(bsway*dir);
+                ctx.beginPath(); ctx.moveTo(0,0);
+                ctx.quadraticCurveTo(blen*.5*dir,-blen*.28,blen*dir,-blen*.05);
+                ctx.strokeStyle=`hsla(${p.hue+15},${p.sat+10}%,${p.lit+10}%,0.8)`;
+                ctx.lineWidth=1.8; ctx.stroke(); ctx.restore();
+            });
+        }
+        ctx.restore();
+    }
+
+    function drawFan(p, t, progress) {
+        if (progress < 0.01) return;
+        ctx.save(); ctx.translate(p.x, H); ctx.lineCap='round';
+        if (p.hovered) { ctx.shadowColor=p.glow; ctx.shadowBlur=16; }
+        const drawBranch = (x,y,angle,len,depth,maxD) => {
+            if (depth===0||len<2) return;
+            const sway=Math.sin(t*p.speed+p.phase+depth*0.7)*0.08*(maxD-depth+1);
+            const ex=x+Math.cos(angle+sway)*len*progress;
+            const ey=y-Math.abs(Math.sin(angle+sway))*len*0.9*progress;
+            ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(ex,ey);
+            ctx.strokeStyle=`hsla(${p.hue},${p.sat}%,${p.lit+depth*6}%,${0.5+depth*0.12})`;
+            ctx.lineWidth=depth*0.95; ctx.stroke();
+            drawBranch(ex,ey,angle-0.48,len*0.7,depth-1,maxD);
+            drawBranch(ex,ey,angle+0.48,len*0.7,depth-1,maxD);
+        };
+        drawBranch(0,0,Math.PI/2,p.height*0.52,5,5);
+        ctx.shadowBlur=0; ctx.restore();
+    }
+
+    function drawAnemone(p, t, progress) {
+        if (progress < 0.01) return;
+        ctx.save(); ctx.translate(p.x, H); ctx.lineCap='round';
+        if (p.hovered) { ctx.shadowColor=p.glow; ctx.shadowBlur=20; }
+        // Base bulb
+        ctx.beginPath(); ctx.ellipse(0,-5*progress, p.width*1.8, 7*progress, 0, 0, Math.PI*2);
+        ctx.fillStyle=`hsla(${p.hue},${p.sat}%,${p.lit}%,0.7)`; ctx.fill();
+        for (let ti=0; ti<p.tentacles; ti++) {
+            const tPhase=(ti/p.tentacles)*Math.PI*2;
+            const tlen=p.height*0.9*progress;
+            const sway=Math.sin(t*p.speed*1.5+tPhase)*tlen*0.14;
+            const ex=Math.cos(tPhase)*p.leafSize*0.7+sway*0.4;
+            const ey=-tlen;
+            ctx.beginPath(); ctx.moveTo(0,-4*progress);
+            ctx.bezierCurveTo(sway*.5,-tlen*.4,ex*.85,ey*.85,ex,ey);
+            ctx.strokeStyle=`hsla(${p.hue+ti*10},${p.sat+20}%,${p.lit+16}%,0.8)`;
+            ctx.lineWidth=1.4; ctx.stroke();
+            // Glowing tip
+            const tipPulse = 0.65 + Math.sin(t*p.speed*3+tPhase)*0.35;
+            ctx.beginPath(); ctx.arc(ex,ey,3.2*progress,0,Math.PI*2);
+            ctx.fillStyle=`hsla(${p.hue+25},90%,${p.lit+30}%,${tipPulse*progress})`; ctx.fill();
+        }
+        ctx.shadowBlur=0; ctx.restore();
+    }
+
+    function drawPlantLabel(p, alpha) {
+        if (alpha < 0.01) return;
+        const floatOffset = Math.sin(t * p.speed * 0.8 + p.phase) * 3; // very gentle float
+        const by = H - p.height * p.growProgress - 18 + floatOffset;
+        const bx = p.x;
+        const dark = isDarkFn();
+        const isHov = p.hovered;
+
+        ctx.save();
+        ctx.globalAlpha = Math.min(alpha, 1);
+
+        ctx.font = `${isHov ? '600' : '500'} 10.5px "DM Sans", sans-serif`;
+        const tw = ctx.measureText(p.name).width;
+        const pad = 9, bh = 22, bw = tw + pad * 2;
+
+        // Pill background
+        ctx.beginPath();
+        ctx.roundRect(bx - bw/2, by - bh, bw, bh, 11);
+        ctx.fillStyle = dark
+            ? (isHov ? 'rgba(1,20,40,0.92)' : 'rgba(1,16,32,0.62)')
+            : (isHov ? 'rgba(255,255,255,0.96)' : 'rgba(255,255,255,0.72)');
+        ctx.fill();
+        ctx.strokeStyle = isHov ? p.color + 'cc' : p.color + '55';
+        ctx.lineWidth = isHov ? 1.4 : 0.8;
+        ctx.stroke();
+
+        // Tiny connecting stem line
+        ctx.beginPath();
+        ctx.moveTo(bx, by);
+        ctx.lineTo(bx, by + 6);
+        ctx.strokeStyle = p.color + '44';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Skill name
+        ctx.fillStyle = dark
+            ? (isHov ? '#f0faff' : 'rgba(200,232,245,0.82)')
+            : (isHov ? '#0a2540' : 'rgba(10,37,64,0.72)');
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(p.name, bx, by - bh/2);
+
+        // Level dot only on hover
+        if (isHov) {
+            ctx.font = 'bold 8.5px "Space Mono", monospace';
+            ctx.fillStyle = p.color;
+            ctx.fillText(p.level + '%', bx, by - bh/2 + 10);
+        }
+
+        ctx.restore();
+    }
+
+    // Sandy seafloor with pebbles
+    function drawFloor(theme) {
+        const dark = theme !== 'light';
+        const sandGrad = ctx.createLinearGradient(0, H-55, 0, H);
+        if (dark) {
+            sandGrad.addColorStop(0,'rgba(120,85,45,0)');
+            sandGrad.addColorStop(1,'rgba(110,78,40,0.5)');
+        } else {
+            sandGrad.addColorStop(0,'rgba(240,200,120,0)');
+            sandGrad.addColorStop(1,'rgba(230,185,100,0.55)');
+        }
+        ctx.fillStyle=sandGrad; ctx.fillRect(0,H-55,W,55);
+
+        // Pebbles
+        for (let i=0;i<W;i+=38) {
+            const px = i + Math.sin(i*0.3)*12;
+            const pr = 2.5 + Math.sin(i*0.7)*2;
+            ctx.beginPath(); ctx.ellipse(px, H-8, pr, pr*0.6, 0, 0, Math.PI*2);
+            ctx.fillStyle = dark ? `rgba(80,58,35,0.45)` : `rgba(180,145,80,0.4)`;
+            ctx.fill();
+        }
+    }
+
+    // ── INTERACTION ──
+    canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = (e.clientX - rect.left) * (W / rect.width);
+        const my = (e.clientY - rect.top) * (H / rect.height);
+        hoveredPlant = null;
+        plants.forEach(p => {
+            const dist = Math.abs(mx - p.x);
+            const inHeight = my > (H - p.height * p.growProgress - 20);
+            p.hovered = dist < 28 && inHeight;
+            if (p.hovered) hoveredPlant = p;
+        });
+        canvas.style.cursor = hoveredPlant ? 'pointer' : 'default';
+    });
+    canvas.addEventListener('mouseleave', () => {
+        plants.forEach(p => p.hovered = false);
+        hoveredPlant = null;
+    });
+
+    // ── LOOP ──
+    let started = false;
+    const obsSkill = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && !started) { started = true; loop(); }
+    }, {threshold: 0.1});
+    obsSkill.observe(canvas);
+
+    function loop() {
+        requestAnimationFrame(loop);
+        t += 8;
+        const dark = isDarkFn();
+        const theme = dark ? 'dark' : 'light';
+
+        // Background gradient (ocean deeper look)
+        let bg = ctx.createLinearGradient(0,0,0,H);
+        if (dark) {
+            bg.addColorStop(0,'#011e38');
+            bg.addColorStop(0.6,'#012848');
+            bg.addColorStop(1,'#022040');
+        } else {
+            bg.addColorStop(0,'#c5eeff');
+            bg.addColorStop(0.6,'#95d8f8');
+            bg.addColorStop(1,'#70c5f0');
+        }
+        ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+
+        // Subtle light rays
+        for (let i=0;i<4;i++) {
+            const rx = W*(i+0.8)/4 + Math.sin(t*0.00015+i)*60;
+            const alpha = dark ? 0.03 : 0.05;
+            const rayG = ctx.createLinearGradient(rx,0,rx,H);
+            rayG.addColorStop(0, dark?`rgba(80,200,255,${alpha})`:`rgba(255,255,255,${alpha})`);
+            rayG.addColorStop(1,'rgba(80,200,255,0)');
+            ctx.beginPath(); ctx.moveTo(rx-30,0); ctx.lineTo(rx+30,0);
+            ctx.lineTo(rx+15,H); ctx.lineTo(rx-15,H); ctx.closePath();
+            ctx.fillStyle=rayG; ctx.fill();
+        }
+
+        // Grow plants in + label alpha (always visible once grown)
+        plants.forEach(p => {
+            if (started) p.growProgress = Math.min(1, p.growProgress + 0.004);
+            // Label: fade in once plant is grown enough, always visible
+            const targetAlpha = p.growProgress > 0.6 ? (p.hovered ? 1 : 0.72) : 0;
+            p.labelAlpha = p.labelAlpha + (targetAlpha - p.labelAlpha) * 0.05;
+            // hover bubble alpha (for level display)
+            if (p.hovered) p.bubbleAlpha = Math.min(1, p.bubbleAlpha + 0.08);
+            else p.bubbleAlpha = Math.max(0, p.bubbleAlpha - 0.06);
+        });
+
+        // Draw plants by type
+        plants.forEach(p => {
+            if (p.type==='kelp') drawKelp(p,t,p.growProgress);
+            else if (p.type==='fan') drawFan(p,t,p.growProgress);
+            else drawAnemone(p,t,p.growProgress);
+        });
+
+        drawFloor(theme);
+
+        // Ambient bubbles
+        ambBubbles.forEach((b,idx) => {
+            b.y -= b.speed; b.wobble += b.ws;
+            const bx = b.x + Math.sin(b.wobble)*1.8;
+            ctx.beginPath(); ctx.arc(bx,b.y,b.r,0,Math.PI*2);
+            ctx.strokeStyle = dark?'rgba(127,255,212,0.35)':'rgba(0,150,220,0.3)';
+            ctx.lineWidth=0.8; ctx.stroke();
+            ctx.beginPath(); ctx.arc(bx-b.r*.3,b.y-b.r*.3,b.r*.25,0,Math.PI*2);
+            ctx.fillStyle='rgba(255,255,255,.32)'; ctx.fill();
+            if (b.y+b.r<0) { ambBubbles[idx]=mkAmbBubble(true); ambBubbles[idx].x=Math.random()*W; }
+        });
+
+        // Draw permanent labels on top of plants
+        plants.forEach(p => { if (p.labelAlpha > 0.01) drawPlantLabel(p, p.labelAlpha); });
+
+        // Category zone labels
+        const cats = [
+            {label:'🛡️ SOC & Défense',col:'#7fffd4'},
+            {label:'☁️ Cloud & Infra',col:'#00c8ff'},
+            {label:'🔐 Crypto & Sécurité',col:'#ff6b9d'},
+            {label:'💻 Dev & Web',col:'#ffd166'}
+        ];
+        const zoneW = W/4;
+        cats.forEach((cat,i) => {
+            ctx.save();
+            ctx.globalAlpha = 0.55;
+            ctx.font = '500 10.5px "DM Sans", sans-serif';
+            ctx.fillStyle = cat.col;
+            ctx.textAlign = 'center';
+            ctx.fillText(cat.label, zoneW*i + zoneW/2, 22);
+            // divider line
+            if (i>0) {
+                ctx.globalAlpha=0.12;
+                ctx.beginPath(); ctx.moveTo(zoneW*i,8); ctx.lineTo(zoneW*i,H-60);
+                ctx.strokeStyle=cat.col; ctx.lineWidth=1; ctx.setLineDash([4,8]); ctx.stroke();
+            }
+            ctx.restore();
+        });
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+})();
+
+// ════════════════════════════════════════════════
+//  MOBILE SKILLS ACCORDION
+// ════════════════════════════════════════════════
+(function() {
+    const mobileSkillData = [
+        { category: 'SOC & Défense', color: '#7fffd4', emoji: '🛡️', skills: [
+            {name:'Wazuh / SIEM', level:88},
+            {name:'MITRE ATT&CK', level:85},
+            {name:'TheHive / Cortex', level:82},
+            {name:'Microsoft Sentinel', level:80},
+            {name:'Suricata / IDS', level:78}
+        ]},
+        { category: 'Cloud & Infra', color: '#00c8ff', emoji: '☁️', skills: [
+            {name:'Azure', level:85},
+            {name:'Docker', level:88},
+            {name:'FortiGate / WAF', level:78},
+            {name:'NGINX', level:80},
+            {name:'Linux / Réseaux', level:90}
+        ]},
+        { category: 'Crypto & Sécurité', color: '#ff6b9d', emoji: '🔐', skills: [
+            {name:'Cryptographie (NTRU)', level:82},
+            {name:'Python', level:92},
+            {name:'Flask / API', level:85},
+            {name:'Blockchain', level:75}
+        ]},
+        { category: 'Dev & Web', color: '#ffd166', emoji: '💻', skills: [
+            {name:'React.js', level:80},
+            {name:'Node.js', level:85},
+            {name:'Java', level:78},
+            {name:'Spring Boot', level:75},
+            {name:'HTML / CSS / JS', level:88},
+            {name:'PHP / MySQL', level:76}
+        ]}
+    ];
+
+    const container = document.getElementById('skillsMobile');
+    if (!container) return;
+
+    mobileSkillData.forEach((cat, ci) => {
+        const card = document.createElement('div');
+        card.className = 'skill-domain-card';
+        card.style.borderColor = cat.color + '28';
+
+        const skillRows = cat.skills.map(sk => `
+            <div class="skill-row">
+                <span class="skill-row-name">${sk.name}</span>
+                <div class="skill-row-right">
+                    <div class="skill-bar-wrap">
+                        <div class="skill-bar-fill" style="--fill-w:${sk.level}%; background:${cat.color}; opacity:0.85;"></div>
+                    </div>
+                    <span class="skill-row-pct">${sk.level}%</span>
+                </div>
+            </div>
+        `).join('');
+
+        card.innerHTML = `
+            <div class="skill-domain-header">
+                <div class="skill-domain-left">
+                    <div class="skill-domain-dot" style="background:${cat.color}; box-shadow:0 0 8px ${cat.color}66;"></div>
+                    <div>
+                        <div class="skill-domain-name">${cat.emoji} ${cat.category}</div>
+                        <div class="skill-domain-count">${cat.skills.length} COMPÉTENCES</div>
+                    </div>
+                </div>
+                <span class="skill-domain-chevron">▼</span>
+            </div>
+            <div class="skill-domain-body">
+                <div class="skill-domain-inner">${skillRows}</div>
+            </div>
+        `;
+
+        card.querySelector('.skill-domain-header').addEventListener('click', () => {
+            const wasOpen = card.classList.contains('open');
+            // Close all
+            document.querySelectorAll('.skill-domain-card.open').forEach(c => c.classList.remove('open'));
+            if (!wasOpen) card.classList.add('open');
+        });
+
+        container.appendChild(card);
+    });
+})();
+
+// ════════════════════════════════════════════════
+//  PROJECTS
+// ════════════════════════════════════════════════
+const projects = [
+    {title:'Cloud SOC Platform — Azure',desc:'SOC complet sur Azure avec 3 VMs, réseau SDN ONOS+OpenVSwitch, double couche IDS Suricata, Microsoft Sentinel, automatisation SOAR via Logic App, TheHive, Cortex et AbuseIPDB.',tech:['Azure','Sentinel','Suricata','ONOS','TheHive','Cortex'],category:'SOC',noLink:true},
+    {title:'SOC avec Wazuh, TheHive & MITRE ATT&CK',desc:'Centre opérationnel de sécurité en containers Docker intégrant Wazuh (SIEM), TheHive, Cortex et framework MITRE ATT&CK.',tech:['Docker','Wazuh','TheHive','Cortex','MITRE ATT&CK'],category:'SOC',noLink:true},
+    {title:'Sécurité Serveur Web — DMZ, WAF & Reverse Proxy',desc:'Infrastructure multicouches avec FortiGate, NGINX et ModSecurity. Architecture DMZ avec WAF et Reverse Proxy.',tech:['FortiGate','NGINX','ModSecurity','GNS3','WAF'],category:'SOC',noLink:true},
+    {title:'Honeypot CONPOT — Détection Menaces ICS/SCADA',desc:'Honeypot simulant automate Siemens S7-200 supportant 7 protocoles industriels. 556 événements capturés.',tech:['CONPOT','Modbus','S7comm','ELK Stack','Python'],category:'ICS',noLink:true},
+    {title:'DigiSec',desc:'Application web de sécurité : chiffrement de fichiers, signatures numériques, horodatage, emails chiffrés, QR codes sécurisés.',tech:['Node.js','HTML/CSS','JavaScript','HTTPS'],category:'Web App',github:'https://github.com/fatima-ezzahra-kasraoui/DigiSec'},
+    {title:'Hotel Reservation App',desc:'Application web complète de gestion de réservations hôtelières.',tech:['Web','Full Stack','Database'],category:'Web App',github:'https://github.com/fatima-ezzahra-kasraoui/hotel-reservation-app'},
+    {title:'School Management System',desc:'Système de gestion scolaire : suivi des élèves, notes, emplois du temps.',tech:['PHP','MySQL','Dashboard'],category:'Web App',github:'https://github.com/fatima-ezzahra-kasraoui/school-management'},
+    {title:'Nid de Poule — Road Damage Reporter',desc:'Plateforme de signalement avec géolocalisation et suivi des réparations.',tech:['Web','GIS','Mapping','JavaScript'],category:'Web App',github:'https://github.com/fatima-ezzahra-kasraoui/nid-de-poule-website'},
+    {title:'NTRU Post-Quantum Authentication',desc:'Authentification basée sur NTRU (résistante quantique), Argon2 et AES-GCM.',tech:['Python','Flask','NTRU','Argon2','AES-GCM'],category:'Cryptography',github:'https://github.com/fatima-ezzahra-kasraoui/ntru-quantum-authentification'},
+    {title:'Bitcoin Testnet Explorer',desc:'Exploration du réseau Bitcoin testnet : transactions et mécanismes de consensus.',tech:['Bitcoin','Blockchain','Cryptography'],category:'Blockchain',github:'https://github.com/fatima-ezzahra-kasraoui/bitcoin-testnet'},
+    {title:'AI Phishing Detector',desc:"Détection d'emails de phishing par TF-IDF + Régression Logistique.",tech:['Python','scikit-learn','TF-IDF','Gmail API'],category:'AI',github:'https://github.com/fatima-ezzahra-kasraoui/ai-phishing-detector'}
+];
+const pl = document.getElementById('projectsList');
+function renderProjects(filter='all') {
+    pl.innerHTML='';
+    const list = filter==='all' ? projects : projects.filter(p=>p.category===filter);
+    list.forEach((proj, i)=>{
+        const lnk = proj.github ? `<a href="${proj.github}" target="_blank" class="project-link"><i class="fab fa-github"></i> ${proj.github.split('/').pop()} →</a>` : '';
+        const div = document.createElement('div');
+        div.className = 'project-card reveal';
+        div.style.transitionDelay = (i * 0.06) + 's';
+        div.innerHTML = `<div class="project-header"><div class="project-title">${proj.title}</div><span class="project-category">${proj.category}</span></div><p class="project-desc">${proj.desc}</p><div class="project-tech">${proj.tech.map(t=>`<span class="tech-tag">${t}</span>`).join('')}</div>${lnk}`;
+        pl.appendChild(div);
+        setTimeout(() => revealObs.observe(div), 10);
+    });
+}
+renderProjects();
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        renderProjects(btn.dataset.filter);
+    });
+});
+
+// ════════════════════════════════════════════════
+//  TIMELINE
+// ════════════════════════════════════════════════
+const timelineData=[
+    {date:'Juil – Août 2025',title:'Stage Développeur Web',sub:'INTELLCAP SARL · Filiale Africa/Morocco',desc:"Détection d'attaques DDoS par machine learning avec Python et scikit-learn."},
+    {date:'2024 – 2027',title:'Cycle Ingénieur',sub:'ENSA Marrakech · Cybersécurité & Télécoms Embarqués',desc:"Formation d'ingénieur spécialisée en cybersécurité et systèmes de télécommunications embarqués."}
+];
+const tEl=document.getElementById('timelineEl');
+timelineData.forEach((item, i)=>{
+    tEl.innerHTML+=`<div class="timeline-item reveal" style="transition-delay:${i*0.15}s"><div class="timeline-dot"></div><div class="timeline-date">${item.date}</div><div class="timeline-title">${item.title}</div><div class="timeline-sub">${item.sub}</div><div class="timeline-desc">${item.desc}</div></div>`;
+});
+document.querySelectorAll('.timeline-item').forEach(el => revealObs.observe(el));
+
+// ════════════════════════════════════════════════
+//  SKILLS OBSERVER
+// ════════════════════════════════════════════════
+const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting&&e.target.classList.contains('skill-progress')) e.target.style.width=e.target.dataset.level+'%'; });
+},{threshold:0.3});
+document.querySelectorAll('.skill-progress').forEach(b=>obs.observe(b));
+
+// ════════════════════════════════════════════════
+//  FORM + SCROLL
+// ════════════════════════════════════════════════
+window.handleSubmit=function(e){ e.preventDefault(); alert('🐠 Message envoyé ! Je vous répondrai dans les 24 heures.'); e.target.reset(); return false; };
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',function(e){ const t=document.querySelector(this.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});} });
+});
+</script>
+</body>
+</html>
